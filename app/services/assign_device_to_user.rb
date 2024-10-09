@@ -10,7 +10,7 @@ class AssignDeviceToUser
   def call
 
     if @new_device_owner_id != @requesting_user.id
-      raise RegistrationError::Unauthorized, 'You cannot assign devices to other users'
+      raise RegistrationError::Unauthorized, 'Unauthorized'
     end
 
     device = Device.find_by(serial_number: @serial_number)

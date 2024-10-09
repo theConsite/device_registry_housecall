@@ -24,6 +24,8 @@ RSpec.describe AssignDeviceToUser do
 
   context 'when user registers a device on self' do
     let(:new_device_owner_id) { user.id }
+    let!(:device) { create(:device, serial_number: serial_number, owner: nil) }
+
 
     it 'creates a new device' do
       assign_device

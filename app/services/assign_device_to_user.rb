@@ -20,12 +20,6 @@ class AssignDeviceToUser
       raise AssigningError::AlreadyUsedOnOtherUser, 'Device is assigned to another user'
     end
 
-    # puts(device.previously_owned_by?(@requesting_user))
-
-    # if(device.previously_owned_by?(@requesting_user))
-    #   raise AssigningError::AlreadyUsedOnUser 'User already assigned device in the past'
-    # end
-
     device.update!(owner_id: @new_device_owner_id)
 
   end

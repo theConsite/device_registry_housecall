@@ -1,24 +1,28 @@
-# README
 
-Your task is to implement the part of the application that helps track devices assigned to users within an organization.
+# Device registry
 
-For now, we have two ActiveRecord models: User and Device.
-User can have many devices; the device should be active only for one assigned user.
-There are 2 actions a User can take with the Device: assign the device to User or return the Device.
+A project created as recruitment task for Housecall Pro.
 
-Here are the product requirements:
-- User can assign the device only to themself. 
-- User can't assign the device already assigned to another user.
-- Only the user who assigned the device can return it. 
-- If the user returned the device in the past, they can't ever re-assign the same device to themself.
+## Description
+Project contains Ruby on rails application that manages device assingment registry. There are 2 main entities: Users and Devices
+
+## Author
+- [Adrian Jobda](https://www.github.com/theConsite)
 
 
-TODO:
- - Clone this repo to your local machine - DON'T FORK IT.
- - Fix the config, so you can run the test suite properly.
- - Implement the code to make the tests pass for `AssignDeviceToUser` service.
- - Following the product requirements listed above, implement tests for returning the device and then implement the code to make them pass.
- - In case you are missing additional product requirements, use your best judgment. Have fun with it.
- - Refactor at will. Do you see something you don't like? Change it. It's your code. Remember to satisfy the outlined product requirements though.
- - Remember to document your progress using granular commits and meaningful commit messages.
- - Publish your code as a public repo using your Github account.
+## Requirements and TODO
+Requirement | Done 
+--- | --- 
+User can assign the device only to themself. | &check;
+User can't assign the device already assigned to another user. | &check;
+Only the user who assigned the  device can return it. | &check;
+If the user returned the device in the past, they can't ever re-assign the same device to themself. | &check;
+Successful execution of commands in order:  1.Setting up the proper Ruby version. 2.Running bundle install. 3.Running rspec spec. 4. Running rake db:test:prepare. | &check;
+
+TODO | Done
+---|---
+Clone this repo to your local machine| &check;
+Fix the config, so you can run the test suite properly| &check;
+Implement the code to make the tests pass for AssignDeviceToUser service| &check;
+Following the product requirements listed above, implement tests for returning the device and then implement the code to make them pass| &check;
+In case you are missing additional product requirements, use your best judgment. Have fun with it| &check;

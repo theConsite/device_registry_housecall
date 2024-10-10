@@ -38,4 +38,22 @@ RSpec.describe ReturnDeviceFromUser do
       expect { return_device }.to raise_error(ReturningError::NotAssignedToUser)
     end
   end
+
+  context 'when user returns device assigned to himself' do
+    let!(:device) { create(:device, serial_number: serial_number, owner: nil) }
+    let(:from_user) { user.id }
+    before do
+      AssignDeviceToUser.new(
+        requesting_user: user,
+        serial_number: serial_number,
+        new_device_owner_id: user.id
+      ).call
+      return_device
+    end
+
+    it 'clears device owner and saves assingment in history' do
+      expect(device.owner_id).to be_nil
+      expect(DeviceAssignment.exists?(user_id: from_user, device_id: device.id)).to be_truthy
+    end
+  end
 end

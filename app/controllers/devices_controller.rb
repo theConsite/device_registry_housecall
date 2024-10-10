@@ -15,7 +15,7 @@ class DevicesController < ApplicationController
 
   def unassign
     ReturnDeviceFromUser.new(
-      user: @user,
+      user: @current_user,
       serial_number: params[:serial_number],
       from_user: params[:from_user].to_i
     ).call

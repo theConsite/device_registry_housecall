@@ -9,7 +9,6 @@ class DevicesController < ApplicationController
       new_device_owner_id: params[:new_device_owner_id].to_i
     ).call
     head :ok
-    puts params[:serial_number]
   rescue RegistrationError::Unauthorized => e
     render json: { error: e.message }, status: :unprocessable_entity
   end

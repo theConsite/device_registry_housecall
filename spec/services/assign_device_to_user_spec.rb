@@ -23,7 +23,7 @@ RSpec.describe AssignDeviceToUser do
   end
 
   context 'when user registers a device on self' do
-    let(:new_device_owner_id) { user.id }
+    let!(:new_device_owner_id) { user.id }
     let!(:device) { create(:device, serial_number: serial_number, owner: nil) }
 
 
@@ -39,8 +39,8 @@ RSpec.describe AssignDeviceToUser do
         ReturnDeviceFromUser.new(user: user, serial_number: serial_number, from_user: user.id).call
       end
 
-      it 'does not allow to register' do
-        expect { assign_device }.to raise_error(AssigningError::AlreadyUsedOnUser)
+      it 'does not allow to register' do        
+        expect { described_class.new(requesting_user: user, serial_number: serial_number, new_device_owner_id: new_device_owner_id).call }.to raise_error(AssigningError::AlreadyUsedOnUser)
       end
     end
 

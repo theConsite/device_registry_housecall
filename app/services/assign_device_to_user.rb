@@ -16,6 +16,10 @@ class AssignDeviceToUser
     device = Device.find_by(serial_number: @serial_number)
     raise RegistrationError::DeviceNotFound, 'Device not found' unless device
 
+    if DeviceAssignment.exists?(user_id: @new_device_owner_id, device_id: device.id)
+      raise AssigningError::AlreadyUsedOnUser, 'User already used device in the past'
+    end
+
     if device.owner_id != nil && @requesting_user.id
       raise AssigningError::AlreadyUsedOnOtherUser, 'Device is assigned to another user'
     end

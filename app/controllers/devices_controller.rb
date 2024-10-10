@@ -14,7 +14,14 @@ class DevicesController < ApplicationController
   end
 
   def unassign
-    # TODO: implement the unassign action
+    ReturnDeviceFromUser.new(
+      user: @user,
+      serial_number: params[:serial_number],
+      from_user: params[:from_user].to_i
+    ).call
+    head :ok
+  rescue RegistrationError::Unauthorized => e
+    render json: { error: e.message }, status: :unprocessable_entity
   end
 
   private

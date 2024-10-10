@@ -8,6 +8,7 @@ class ReturnDeviceFromUser
   end
 
   def call
+
     if @from_user != @user.id
       raise RegistrationError::Unauthorized, 'Unauthorized'
     end
@@ -15,7 +16,7 @@ class ReturnDeviceFromUser
     device = Device.find_by(serial_number: @serial_number)
     raise RegistrationError::DeviceNotFound, 'Device not found' unless device
 
-    if device.owner_id == nil && @from_user != device.owner_id
+    if device.owner_id == nil || @from_user != device.owner_id
       raise ReturningError::NotAssignedToUser, 'Device is not assigned to You'
     end
 

@@ -30,7 +30,8 @@ RSpec.describe ReturnDeviceFromUser do
       AssignDeviceToUser.new(
         requesting_user: new_user,
         serial_number: serial_number,
-        new_device_owner_id: new_user.id
+        new_device_owner_id: new_user.id,
+        reason: 'Test zwrotów'
       ).call
     end
 
@@ -46,7 +47,8 @@ RSpec.describe ReturnDeviceFromUser do
       AssignDeviceToUser.new(
         requesting_user: user,
         serial_number: serial_number,
-        new_device_owner_id: user.id
+        new_device_owner_id: user.id,
+        reason: 'Test'
       ).call
       return_device
     end

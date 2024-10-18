@@ -21,6 +21,5 @@ class ReturnDeviceFromUser
     end
 
     device.update!(owner_id: nil)
-    DeviceAssignment.create!(user_id: @from_user, device_id: device.id)
   end
 end

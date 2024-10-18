@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class AssignDeviceToUser
-  def initialize(requesting_user:, serial_number:, new_device_owner_id:)
+  def initialize(requesting_user:, serial_number:, new_device_owner_id:, reason:)
     @requesting_user = requesting_user
     @serial_number = serial_number
     @new_device_owner_id = new_device_owner_id
+    @reason = reason
   end
 
   def call
@@ -25,6 +26,7 @@ class AssignDeviceToUser
     end
 
     device.update!(owner_id: @new_device_owner_id)
+    DeviceAssignment.create!(user_id: @new_device_owner_id, device_id: device.id, reason: @reason)
 
   end
 end

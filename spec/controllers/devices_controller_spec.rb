@@ -9,7 +9,7 @@ RSpec.describe DevicesController, type: :controller do
   describe 'POST #assign' do
     subject(:assign) do
       post :assign,
-           params: { new_device_owner_id: new_owner_id, serial_number: '123456' },
+           params: { new_device_owner_id: new_owner_id, serial_number: '123456', reason: 'Test API' },
            session: { token: user.api_keys.first.token }
     end
     context 'when the user is authenticated' do
@@ -67,7 +67,8 @@ RSpec.describe DevicesController, type: :controller do
           AssignDeviceToUser.new(
             requesting_user: user,
             serial_number: device.serial_number,
-            new_device_owner_id: from_user
+            new_device_owner_id: from_user,
+            reason: 'Test'
           ).call
         end
 
@@ -86,7 +87,8 @@ RSpec.describe DevicesController, type: :controller do
           AssignDeviceToUser.new(
             requesting_user: other_user,
             serial_number: device.serial_number,
-            new_device_owner_id: other_user.id
+            new_device_owner_id: other_user.id,
+            reason: 'Test'
           ).call
         end
 

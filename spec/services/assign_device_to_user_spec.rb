@@ -34,6 +34,12 @@ RSpec.describe AssignDeviceToUser do
       expect(user.devices.pluck(:serial_number)).to include(serial_number)
     end
 
+    it 'assingns reason to assignment history' do
+      assign_device
+
+      expect(user.device_assignments.last.reason).to eq('Testy')
+    end
+
     context 'when a user tries to register a device that was already assigned to and returned by the same user' do
       before do
         assign_device
